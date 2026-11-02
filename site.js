@@ -281,4 +281,21 @@
     }), { rootMargin: '-15% 0px -70% 0px' });
     $$('.doc h2[id]').forEach((h) => spy.observe(h));
   }
+  // ---------- Meta Pixel events for ads: the steps before sign-up ----------
+  const track = (name, params) => { try { if (window.fbq) window.fbq('track', name, params || {}); } catch (_) { /* blocked */ } };
+  if (location.pathname === '/pricing') track('ViewContent', { content_name: 'Pricing' });
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest && e.target.closest('a');
+    if (!a) return;
+    const href = a.getAttribute('href') || '';
+    if (href.includes('app.dealflowcrm.co.in/settings/plan?buy=')) {
+      const p = new URL(href).searchParams;
+      const tier = p.get('buy'), seats = Number(p.get('seats') || 1);
+      track('InitiateCheckout', { content_name: tier, num_items: seats, value: (tier === 'pro' ? 24000 : 12000) * seats, currency: 'INR' });
+    } else if (href.includes('app.dealflowcrm.co.in/signin')) {
+      track('Lead', { content_name: (a.textContent || '').trim().slice(0, 40) });
+    }
+  }, true);
+  const contactForm = $('[data-contact]');
+  if (contactForm) contactForm.addEventListener('submit', () => track('Contact'));
 })();
