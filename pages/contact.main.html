@@ -1,0 +1,36 @@
+<main id="main">
+  <section class="page-hero">
+    <div class="glow g1"></div>
+    <div class="container rel">
+      <span class="kicker reveal">Contact</span>
+      <h1 class="display words">Let's<br><span class="gold-text">talk.</span></h1>
+      <p class="sub reveal">A demo, a question, or help getting set up. We're here.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 40px">
+    <div class="glow g2"></div>
+    <div class="container rel">
+      <div class="contact-grid stagger">
+        <div class="glass">{{icon-lg:mail}}<h3>Email</h3><a class="val" href="mailto:dealflowcrm@yahoo.com">dealflowcrm@yahoo.com</a></div>
+        <div class="glass">{{icon-lg:phone-call}}<h3>Phone</h3><a class="val" href="tel:+917439852955">+91 74398 52955</a></div>
+        <div class="glass">{{icon-lg:calendar-check}}<h3>Hours</h3><p>Monday to Friday, 9 am to 5 pm IST</p></div>
+      </div>
+
+      <form class="glass form reveal" data-contact>
+        <h2 class="title" style="font-size: clamp(30px, 3.4vw, 44px)">Send us a message.</h2>
+        <div class="two">
+          <label>Your name<input name="name" required autocomplete="name"></label>
+          <label>Business<input name="business" autocomplete="organization"></label>
+        </div>
+        <div class="two">
+          <label>Phone<input name="phone" type="tel" autocomplete="tel"></label>
+          <label>Team size<select name="team"><option>Just me</option><option>2 to 5</option><option>6 to 20</option><option>More than 20</option></select></label>
+        </div>
+        <label>How can we help?<textarea name="message" required></textarea></label>
+        <div><button class="btn btn-gold" type="submit">Send message</button></div>
+        <p class="price-note" style="text-align:left; margin-top: 4px">Opens your email app with your message ready to send.</p>
+      </form>
+    </div>
+  </section>
+</main>

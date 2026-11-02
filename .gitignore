@@ -1,0 +1,5 @@
+.firebase/
+.taste-skill/
+node_modules/
+# Customer call recording: served on the website, never stored in the public repo.
+assets/audio/
