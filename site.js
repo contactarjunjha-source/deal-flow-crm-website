@@ -203,28 +203,60 @@
     render();
   }
 
+  // ---------- Currency: rupees in India, US dollars everywhere else ----------
+  // Paying in US dollars needs Cashfree's international payments; until they're on, dollar
+  // buyers are sent to talk to us instead of to a checkout that would fail.
+  const USD_CHECKOUT = false;
+  const tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || '');
+  let cur = 'usd';
+  try { cur = localStorage.getItem('df-cur') || (/^Asia\/(Kolkata|Calcutta)$/.test(tz) ? 'inr' : 'usd'); } catch (_) { cur = /^Asia\/(Kolkata|Calcutta)$/.test(tz) ? 'inr' : 'usd'; }
+  const onCurrency = [];
+  const setCurrency = (c, save) => {
+    cur = c;
+    if (save) { try { localStorage.setItem('df-cur', c); } catch (_) { /* private mode */ } }
+    $$('.money').forEach((m) => { m.textContent = m.dataset[c]; });
+    $$('[data-cur]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.cur === c)));
+    $$('.tax-note').forEach((n) => { n.hidden = c !== 'inr'; });
+    onCurrency.forEach((f) => f());
+  };
+  $$('[data-cur]').forEach((b) => b.addEventListener('click', () => setCurrency(b.dataset.cur, true)));
+
   // ---------- Pricing: choose a plan and seats, then pay ----------
   const co = $('[data-checkout]');
   if (co) {
-    const prices = { basic: 12000, pro: 24000 };
+    const prices = { inr: { basic: 12000, pro: 24000 }, usd: { basic: 228, pro: 588 } };
     let tier = 'pro', seats = 1;
     const out = $('output', co), amt = $('.amt', co), per = $('.per', co), pay = $('.pay', co);
-    const inr = (n) => '₹' + n.toLocaleString('en-IN');
+    const money = (n) => (cur === 'inr' ? '₹' + n.toLocaleString('en-IN') : '$' + n.toLocaleString('en-US'));
     const show = () => {
-      $$('.seg button', co).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.tier === tier)));
+      $$('.seg button[data-tier]', co).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.tier === tier)));
+      const year = prices[cur][tier];
       out.textContent = seats;
-      amt.textContent = inr(prices[tier] * seats);
-      per.textContent = `a year for ${seats} ${seats === 1 ? 'seat' : 'seats'} · ${inr(prices[tier] / 12)} per seat a month`;
-      pay.href = `https://app.dealflowcrm.co.in/settings/plan?buy=${tier}&seats=${seats}`;
-      pay.textContent = `Pay ${inr(prices[tier] * seats)}`;
+      amt.textContent = money(year * seats);
+      per.textContent = `a year for ${seats} ${seats === 1 ? 'seat' : 'seats'} · ${money(year / 12)} per seat a month`;
+      if (cur === 'inr' || USD_CHECKOUT) {
+        pay.href = `https://app.dealflowcrm.co.in/settings/plan?buy=${tier}&seats=${seats}`;
+        pay.textContent = `Pay ${money(year * seats)}`;
+      } else {
+        pay.href = `/contact?buy=${tier}&seats=${seats}`;
+        pay.textContent = 'Talk to us to buy';
+      }
     };
-    $$('.seg button', co).forEach((b) => b.addEventListener('click', () => { tier = b.dataset.tier; show(); }));
+    $$('.seg button[data-tier]', co).forEach((b) => b.addEventListener('click', () => { tier = b.dataset.tier; show(); }));
     $('[data-minus]', co).addEventListener('click', () => { seats = Math.max(1, seats - 1); show(); });
     $('[data-plus]', co).addEventListener('click', () => { seats = Math.min(500, seats + 1); show(); });
     $$('[data-pick]').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); tier = a.dataset.pick; show(); co.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }); }));
     const fromUrl = new URLSearchParams(location.search).get('plan');
     if (fromUrl === 'basic' || fromUrl === 'pro') tier = fromUrl;
-    show();
+    onCurrency.push(show);
+  }
+  setCurrency(cur, false);
+
+  // A plan chosen on the pricing page arrives in the contact message.
+  const buy = new URLSearchParams(location.search);
+  const msg = $('[data-contact] textarea[name="message"]');
+  if (msg && (buy.get('buy') === 'basic' || buy.get('buy') === 'pro')) {
+    msg.value = `We'd like to buy the ${buy.get('buy') === 'pro' ? 'Pro' : 'Basic'} plan for ${buy.get('seats') || 1} seat(s), paying in US dollars.`;
   }
 
   // ---------- Contact form: opens an email with the details filled in ----------

@@ -660,3 +660,8 @@ h1, h2, h3 { margin: 0; font-weight: 700; letter-spacing: -0.035em; }
 .whatis p { color: var(--ink-2); font-size: clamp(17px, 1.4vw, 19px); line-height: 1.65; margin: 14px 0 0; }
 .whatis strong { color: var(--ink); }
 .hero .kicker { margin-bottom: 18px; }
+
+/* Currency switch */
+.cur-seg { margin-top: 24px; }
+.cur-seg button { height: 38px; padding: 0 18px; font-size: 14px; }
+.head.center .cur-seg { display: inline-flex; }

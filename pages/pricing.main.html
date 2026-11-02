@@ -5,7 +5,8 @@
     <div class="container rel">
       <span class="kicker reveal">Pricing</span>
       <h1 class="display words">Simple.<br><span class="gold-text">Yearly.</span></h1>
-      <p class="sub reveal">Per person, GST included, no auto-debit. Start free with every feature.</p>
+      <p class="sub reveal">Per person, paid once a year, no auto-debit. Start free with every feature.</p>
+      <div class="reveal" style="margin-top: 28px"><div class="seg cur-seg" role="group" aria-label="Currency"><button type="button" data-cur="usd" aria-pressed="true">$ USD</button><button type="button" data-cur="inr" aria-pressed="false">₹ INR</button></div></div>
     </div>
   </section>
 
@@ -14,18 +15,18 @@
     <div class="container rel">
       <div class="plans stagger">
         <div class="glass plan">
-          <div class="name">Free</div><div class="price">₹0</div><div class="per">To try everything</div>
+          <div class="name">Free</div><div class="price"><span class="money" data-inr="₹0" data-usd="$0">$0</span></div><div class="per">To try everything</div>
           <ul><li>Every feature, AI included</li><li>5 leads and 5 deals</li><li>Any number of people</li><li>No card needed</li></ul>
           <a class="btn btn-glass" href="https://app.dealflowcrm.co.in/signin">Start free</a>
         </div>
         <div class="glass plan">
-          <div class="name">Basic</div><div class="price">₹1,000</div><div class="per">per seat a month · ₹12,000 a year</div>
-          <ul><li>Unlimited leads and deals</li><li>Lead Rescue and Today's Work</li><li>GST quotes and invoices</li><li>Email, calendar, booking links</li><li>Meeting notes and AI drafts</li><li>Reports and automations</li></ul>
+          <div class="name">Basic</div><div class="price"><span class="money" data-inr="₹1,000" data-usd="$19">$19</span></div><div class="per">per seat a month · <span class="money" data-inr="₹12,000" data-usd="$228">$228</span> a year</div>
+          <ul><li>Unlimited leads and deals</li><li>Lead Rescue and Today's Work</li><li>Tax-ready quotes and invoices</li><li>Email, calendar, booking links</li><li>Meeting notes and AI drafts</li><li>Reports and automations</li></ul>
           <a class="btn btn-glass" href="?plan=basic#buy" data-pick="basic">Buy Basic</a>
         </div>
         <div class="glass plan featured">
           <span class="badge">Most complete</span>
-          <div class="name">Pro</div><div class="price">₹2,000</div><div class="per">per seat a month · ₹24,000 a year</div>
+          <div class="name">Pro</div><div class="price"><span class="money" data-inr="₹2,000" data-usd="$49">$49</span></div><div class="per">per seat a month · <span class="money" data-inr="₹24,000" data-usd="$588">$588</span> a year</div>
           <ul><li>Everything in Basic</li><li>AI calling agent</li><li>Bulk AI calling</li><li>AI campaign builder</li><li>WhatsApp inbox</li><li>Ask AI by voice</li><li>Priority support</li></ul>
           <a class="btn btn-gold" href="?plan=pro#buy" data-pick="pro">Buy Pro</a>
         </div>
@@ -35,7 +36,7 @@
       <div class="glass checkout reveal" id="buy" data-checkout>
         <div>
           <h3>Buy online.</h3>
-          <p class="lead">Choose a plan and the number of people. You'll sign in or create your account, then pay securely by UPI, card or net banking.</p>
+          <p class="lead">Choose a plan and the number of people. You'll sign in or create your account, then pay securely online.</p>
           <div class="co-row"><span class="lbl">Plan</span>
             <div class="seg" role="group" aria-label="Plan"><button type="button" data-tier="basic">Basic</button><button type="button" data-tier="pro">Pro</button></div>
           </div>
@@ -44,13 +45,12 @@
           </div>
         </div>
         <div class="total">
-          <div class="amt">₹24,000</div>
+          <div class="amt">$588</div>
           <div class="per">a year for 1 seat</div>
           <a class="btn btn-gold pay" href="https://app.dealflowcrm.co.in/settings/plan?buy=pro&amp;seats=1">Pay ₹24,000</a>
-          <div class="fine">GST included · Secured by Cashfree · Renews only when you choose</div>
+          <div class="fine">Secured by Cashfree · Renews only when you choose · <span class="tax-note">Prices in India include GST</span></div>
         </div>
       </div>
-      <p class="price-note">Outside India: $19 Basic and $49 Pro per seat a month, paid yearly. <a class="link" href="/contact">Write to us <span>→</span></a></p>
 
       <div class="glass compare-wrap reveal">
         <table class="compare">
@@ -59,7 +59,7 @@
             <tr><th scope="row">Leads and deals</th><td>5 each</td><td>Unlimited</td><td>Unlimited</td></tr>
             <tr><th scope="row">Lead Rescue, Today's Work</th><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
             <tr><th scope="row">Pipelines and custom fields</th><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-            <tr><th scope="row">GST quotes, invoices, renewals</th><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><th scope="row">Tax-ready quotes, invoices, renewals</th><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
             <tr><th scope="row">Gmail, Outlook, calendar</th><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
             <tr><th scope="row">Booking links</th><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
             <tr><th scope="row">Meeting notes, AI drafts, card scanner</th><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
@@ -80,7 +80,7 @@
     <div class="container rel">
       <div class="head center reveal"><h2 class="title">Billing, answered.</h2></div>
       <div class="faq stagger">
-        <details class="glass" name="bill"><summary>How do I pay?<i></i></summary><p>Through Cashfree, by UPI, debit or credit card, or net banking. You pay for a year at a time, GST included.</p></details>
+        <details class="glass" name="bill"><summary>How do I pay?<i></i></summary><p>Online through Cashfree: by card, and in India also by UPI or net banking. You pay for a year at a time. Prices in India include GST.</p></details>
         <details class="glass" name="bill"><summary>Can I pay before creating an account?<i></i></summary><p>Your payment is linked to your workspace, so you sign in or sign up first. It takes a minute, and the payment opens right after.</p></details>
         <details class="glass" name="bill"><summary>Does it renew automatically?<i></i></summary><p>No. We remind you 14, 7 and 1 day before your year ends. Renewal opens 30 days before.</p></details>
         <details class="glass" name="bill"><summary>What if I don't renew?<i></i></summary><p>Three days after the year ends you move to the free plan. Nothing is deleted.</p></details>
