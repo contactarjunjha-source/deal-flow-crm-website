@@ -53,6 +53,18 @@
           }
         ]
       }
+    ],
+    "redirects": [
+      {
+        "source": "/data-handling",
+        "destination": "/privacy-policy",
+        "type": 301
+      },
+      {
+        "source": "/data-handling.html",
+        "destination": "/privacy-policy",
+        "type": 301
+      }
     ]
   }
 }

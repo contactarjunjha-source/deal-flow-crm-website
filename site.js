@@ -237,4 +237,16 @@
       location.href = `mailto:support@dealflowcrm.co.in?subject=${encodeURIComponent('Deal Flow CRM enquiry from ' + (f.get('business') || f.get('name')))}&body=${encodeURIComponent(body)}`;
     });
   }
+  // Legal pages: highlight the section being read in the side menu.
+  const tocLinks = $$('.legal-toc nav a');
+  if (tocLinks.length && 'IntersectionObserver' in window) {
+    const byId = new Map(tocLinks.map((a) => [a.getAttribute('href').slice(1), a]));
+    const spy = new IntersectionObserver((entries) => entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      tocLinks.forEach((a) => a.classList.remove('on'));
+      const a = byId.get(e.target.id);
+      if (a) a.classList.add('on');
+    }), { rootMargin: '-15% 0px -70% 0px' });
+    $$('.doc h2[id]').forEach((h) => spy.observe(h));
+  }
 })();

@@ -2,6 +2,7 @@
 // Edit pages/<name>.main.html (and <name>.credits.html), then run: node build.mjs
 import { readFileSync, writeFileSync } from 'node:fs';
 import { icon } from './icons.mjs';
+import { buildLegal } from './legal.mjs';
 import { createHash } from 'node:crypto';
 
 // Each release gets new file versions, so browsers never mix new pages with old styles or scripts.
@@ -127,12 +128,12 @@ const footer = () => `
       <div class="foot-cols">
         <div><h4>Product</h4><a href="/features">Features</a><a href="/ai-calling">AI calling</a><a href="/crm">CRM</a><a href="/integrations">Integrations</a></div>
         <div><h4>Solutions</h4><a href="/use-cases">Use cases</a><a href="/pricing">Pricing</a><a href="/security">Security</a><a href="/faq">Questions</a></div>
-        <div><h4>Company</h4><a href="/contact">Contact us</a><a href="${APP}">Log in</a><a href="${APP}">Start free</a><a href="https://app.dealflowcrm.co.in/legal/grievance.html">Grievance officer</a></div>
-        <div><h4>Legal</h4><a href="/privacy-policy">Privacy</a><a href="/terms-of-service">Terms</a><a href="/billing-refunds">Refunds</a><a href="/data-deletion">Data deletion</a></div>
+        <div><h4>Company</h4><a href="/contact">Contact us</a><a href="${APP}">Log in</a><a href="${APP}">Start free</a><a href="/grievance">Grievance officer</a></div>
+        <div><h4>Legal</h4><a href="/privacy-policy">Privacy</a><a href="/terms-of-service">Terms</a><a href="/billing-refunds">Refunds</a><a href="/legal">All policies</a></div>
       </div>
     </div>
     <div class="foot-word" aria-hidden="true">Deal Flow</div>
-    <div class="foot-bottom"><span>© 2026 Momentum Marketing &amp; Software Technologies</span><span class="legal"><a href="/cookies">Cookies</a><a href="/data-handling">Data handling</a><a href="/privacy-policy">Privacy</a></span></div>
+    <div class="foot-bottom"><span>© 2026 Momentum Marketing &amp; Software Technologies</span><span class="legal"><a href="/cookies">Cookies</a><a href="/shipping-delivery">Shipping</a><a href="/acceptable-use">Acceptable use</a><a href="/data-deletion">Data deletion</a></span></div>
   </div>
 </footer>
 <script src="/site.js?v=${V.js}" defer></script>
@@ -145,3 +146,11 @@ for (const p of PAGES) {
   writeFileSync(`${p.name}.html`, head(p) + '\n' + main.trim().split('<!--RIBBONS-->').join(RIBBONS).split('<!--CALL-->').join(readFileSync('pages/call.partial.html', 'utf8').split('rotiyana-call.mp3').join('rotiyana-call.mp3?v=' + V.audio)).replace(/\{\{icon(-lg)?:([a-z0-9-]+)\}\}/g, (_, lg, n) => `<span class="ibox${lg ? ' lg' : ''}">${icon(n)}</span>`).replace(/\{\{svg:([a-z0-9-]+)\}\}/g, (_, n) => icon(n)) + '\n' + footer());
   console.log('built', `${p.name}.html`);
 }
+
+// Legal pages: the CRM's approved text in the site's design.
+buildLegal({
+  write: (name, meta, main) => {
+    writeFileSync(`${name}.html`, head({ name, ...meta }) + '\n' + main + '\n' + footer());
+    console.log('built', `${name}.html`);
+  },
+});
