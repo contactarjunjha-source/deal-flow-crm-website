@@ -1,0 +1,27 @@
+# Deal Flow CRM
+
+> Deal Flow CRM (dealflowcrm.co.in) is an AI-powered sales CRM built in India for small and growing sales teams. It tells each salesperson who to call today, keeps leads, WhatsApp chats, emails, calls and GST quotes in one place, and includes an AI calling agent that answers missed calls and calls lead lists in 40+ languages, including Hindi and Hinglish, then books the meeting.
+
+Deal Flow CRM is made by Momentum Marketing & Software Technologies, India. The app runs in any web browser and installs on phones; data is stored on Google Cloud in Mumbai, India. Contact: support@dealflowcrm.co.in, +91 74398 52955.
+
+## Key facts
+- Name: Deal Flow CRM (also written DealFlow CRM). Website: https://dealflowcrm.co.in. App: https://app.dealflowcrm.co.in
+- Category: sales CRM software with an AI calling agent (AI telecaller), for businesses in India and abroad.
+- Pricing (per user, billed yearly, GST included): Free for up to 5 leads and 5 deals with every feature; Basic ₹1,000 a month (₹12,000 a year); Pro ₹2,000 a month (₹24,000 a year). Outside India: $19 and $49 per user a month.
+- Pro adds: the AI calling agent, bulk AI calling, the AI campaign builder, the WhatsApp inbox, Ask AI by voice, and priority support.
+- AI calling: runs through the business's own phone (paired by Bluetooth with a Windows laptop running the free Call Box app) and the business's Google Gemini key; answers missed calls, calls lists one at a time, records, transcribes and summarises every call, and books meetings with Google Meet or Microsoft Teams links.
+- CRM: Today's Work daily list, Lead Rescue alerts, pipelines, GST quotes and invoices, recurring billing, WhatsApp Business, Gmail and Outlook, calendar sync, booking links, meeting notes, round-robin assignment, automations, reports and targets, web forms, API and webhooks, imports from Zoho, HubSpot, Odoo, Pipedrive and Salesforce.
+- Payment: online on the website or in the app, by UPI, card or net banking through Cashfree.
+
+## Pages
+- [Home](https://dealflowcrm.co.in/): what Deal Flow CRM is, with a real recorded AI call.
+- [Features](https://dealflowcrm.co.in/features): all 48 features.
+- [AI calling agent](https://dealflowcrm.co.in/ai-calling): how the AI telecaller works and what it needs.
+- [The CRM](https://dealflowcrm.co.in/crm): Today's Work, GST quotes, conversations and automations.
+- [Use cases](https://dealflowcrm.co.in/use-cases): real estate, education, clinics, food, interiors, manufacturing, retail, agencies, travel.
+- [Integrations](https://dealflowcrm.co.in/integrations): WhatsApp, Gmail, Outlook, Google Calendar, Drive, OneDrive, web forms, API.
+- [Pricing](https://dealflowcrm.co.in/pricing): plans, comparison and online checkout.
+- [FAQ](https://dealflowcrm.co.in/faq): answers on the product, AI calling, billing and data.
+- [Security](https://dealflowcrm.co.in/security): data in India, encryption, roles.
+- [Contact](https://dealflowcrm.co.in/contact)
+- [Legal](https://dealflowcrm.co.in/legal): privacy, terms, refunds, cookies, acceptable use, data deletion, grievance.

@@ -3,6 +3,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { icon } from './icons.mjs';
 import { buildLegal } from './legal.mjs';
+import { jsonLd, sitemap, ROBOTS, LLMS } from './seo.mjs';
 import { createHash } from 'node:crypto';
 
 // Each release gets new file versions, so browsers never mix new pages with old styles or scripts.
@@ -12,26 +13,26 @@ const V = { css: ver('site.css'), js: ver('site.js'), audio: ver('assets/audio/r
 const APP = 'https://app.dealflowcrm.co.in/signin';
 
 const PAGES = [
-  { name: 'index', path: '/', title: 'Deal Flow CRM: the CRM with an AI that answers every call',
-    description: 'Deal Flow CRM tells your team who to call today, and its AI calling agent answers every call you miss in Hindi, Hinglish and English.' },
-  { name: 'features', path: '/features', nav: 'Features', title: 'Features · Deal Flow CRM',
-    description: 'Every Deal Flow CRM feature: AI calling, Lead Rescue, pipelines, GST quotes, WhatsApp, email, booking links, automations and reports.' },
-  { name: 'ai-calling', path: '/ai-calling', nav: 'AI calling', title: 'AI calling agent · Deal Flow CRM',
-    description: 'An AI telecaller that answers your missed calls and calls your lead lists from your own phone, in Hindi, Hinglish and English, and books the meeting.' },
-  { name: 'crm', path: '/crm', title: 'The CRM · Deal Flow CRM',
-    description: 'Leads, follow-ups, pipelines, GST quotes, WhatsApp, email, booking links, automations and reports, in one CRM built for Indian sales teams.' },
-  { name: 'use-cases', path: '/use-cases', nav: 'Use cases', title: 'Use cases · Deal Flow CRM',
-    description: 'How real estate, education, clinics, food services, interiors, manufacturers and agencies can use Deal Flow CRM and its AI calling agent.' },
-  { name: 'integrations', path: '/integrations', title: 'Integrations · Deal Flow CRM',
-    description: 'Deal Flow CRM works with WhatsApp, Gmail, Outlook, Google Calendar, Google Meet, Microsoft Teams, Google Drive, OneDrive, web forms and your own apps.' },
-  { name: 'security', path: '/security', title: 'Security · Deal Flow CRM',
-    description: 'Your data is stored in India, encrypted, and private to your team. How Deal Flow CRM keeps leads, calls and messages safe.' },
-  { name: 'pricing', path: '/pricing', nav: 'Pricing', title: 'Pricing · Deal Flow CRM',
-    description: 'Free for 5 leads and 5 deals. Basic ₹1,000 and Pro ₹2,000 per seat a month, paid yearly, GST included. Pay online in minutes.' },
-  { name: 'faq', path: '/faq', title: 'Questions · Deal Flow CRM',
-    description: 'Answers about Deal Flow CRM: the AI calling agent, features, pricing, billing, data and security.' },
-  { name: 'contact', path: '/contact', title: 'Contact · Deal Flow CRM',
-    description: 'Talk to the Deal Flow CRM team: email, phone, or send us a message.' },
+  { name: 'index', path: '/', title: 'Deal Flow CRM | AI CRM with AI Calling Agent for Sales Teams in India',
+    description: 'Deal Flow CRM is the AI sales CRM that tells your team who to call today, and its AI calling agent answers every missed call in Hindi, Hinglish and 40+ languages. GST quotes, WhatsApp, pipelines. Free to start.' },
+  { name: 'features', path: '/features', nav: 'Features', crumb: 'Features', title: 'Deal Flow CRM Features: AI Calling, Lead Rescue, WhatsApp CRM, GST Quotes',
+    description: 'All 48 Deal Flow CRM features: AI calling agent, bulk AI calls, Lead Rescue, Today\'s Work, pipelines, GST quotes and invoices, WhatsApp inbox, Gmail and Outlook, booking links, automations and reports.' },
+  { name: 'ai-calling', path: '/ai-calling', nav: 'AI calling', crumb: 'AI calling agent', title: 'AI Calling Agent & AI Telecaller in Hindi, Hinglish, 40+ Languages | Deal Flow CRM',
+    description: 'Deal Flow CRM\'s AI calling agent answers your missed calls and calls your lead lists from your own phone in Hindi, Hinglish and 40+ languages, records every call, and books the meeting. Hear a real call.' },
+  { name: 'crm', path: '/crm', crumb: 'The CRM', title: 'Sales CRM Software for Small Businesses in India | Deal Flow CRM',
+    description: 'Deal Flow CRM keeps leads, calls, WhatsApp chats, emails, GST quotes and follow-ups in one place, with a daily list of who to call and alerts when a lead is slipping.' },
+  { name: 'use-cases', path: '/use-cases', nav: 'Use cases', crumb: 'Use cases', title: 'CRM for Real Estate, Education, Clinics, Food, Interiors & B2B | Deal Flow CRM',
+    description: 'How real estate, education, clinics, tiffin and food services, interiors, manufacturers, retail, agencies and travel businesses use Deal Flow CRM and its AI calling agent.' },
+  { name: 'integrations', path: '/integrations', crumb: 'Integrations', title: 'Deal Flow CRM Integrations: WhatsApp, Gmail, Outlook, Google Calendar, API',
+    description: 'Deal Flow CRM works with WhatsApp Business, Gmail, Outlook, Google Calendar, Google Meet, Microsoft Teams, Google Drive, OneDrive, web forms, webhooks, a REST API and your own apps.' },
+  { name: 'security', path: '/security', crumb: 'Security', title: 'Security and Data Privacy, Data Stored in India | Deal Flow CRM',
+    description: 'Deal Flow CRM stores your data on Google Cloud in Mumbai, India, encrypted in transit and at rest, with team roles and private mailboxes. Your data is never used to train our AI.' },
+  { name: 'pricing', path: '/pricing', nav: 'Pricing', crumb: 'Pricing', title: 'Deal Flow CRM Pricing: Free, ₹1,000 and ₹2,000 per User a Month',
+    description: 'Deal Flow CRM is free for 5 leads and 5 deals. Basic ₹1,000 and Pro ₹2,000 per user a month, billed yearly, GST included. Pro adds the AI calling agent and WhatsApp. Buy online by UPI or card.' },
+  { name: 'faq', path: '/faq', crumb: 'FAQ', title: 'Deal Flow CRM FAQ: AI Calling, Features, Pricing, Billing and Data',
+    description: 'Answers to common questions about Deal Flow CRM: what it is, how the AI calling agent works, languages, pricing, billing, payments, imports and where your data is stored.' },
+  { name: 'contact', path: '/contact', crumb: 'Contact', title: 'Contact Deal Flow CRM | Demo and Support',
+    description: 'Talk to the Deal Flow CRM team for a demo or support: support@dealflowcrm.co.in, +91 74398 52955, Monday to Friday, 9 am to 5 pm IST.' },
 ];
 
 const navLinks = (current) => [['/features', 'Features'], ['/ai-calling', 'AI calling'], ['/use-cases', 'Use cases'], ['/pricing', 'Pricing']]
@@ -68,6 +69,18 @@ const head = (p) => `<!DOCTYPE html>
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://dealflowcrm.co.in${p.path}">
   <meta property="og:image" content="https://dealflowcrm.co.in/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Deal Flow CRM">
+  <meta property="og:locale" content="en_IN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${p.title}">
+  <meta name="twitter:description" content="${p.description}">
+  <meta name="twitter:image" content="https://dealflowcrm.co.in/assets/og-image.jpg">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="application-name" content="Deal Flow CRM">
+  <link rel="apple-touch-icon" href="/assets/logo-512.png">
+  ${p.ld || ''}
   <link rel="icon" href="/assets/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -141,8 +154,11 @@ const footer = () => `
 </html>
 `;
 
+const built = [];
 for (const p of PAGES) {
   const main = readFileSync(`pages/${p.name}.main.html`, 'utf8');
+  p.ld = jsonLd(p, main);
+  built.push(p);
   writeFileSync(`${p.name}.html`, head(p) + '\n' + main.trim().split('<!--RIBBONS-->').join(RIBBONS).split('<!--CALL-->').join(readFileSync('pages/call.partial.html', 'utf8').split('rotiyana-call.mp3').join('rotiyana-call.mp3?v=' + V.audio)).replace(/\{\{icon(-lg)?:([a-z0-9-]+)\}\}/g, (_, lg, n) => `<span class="ibox${lg ? ' lg' : ''}">${icon(n)}</span>`).replace(/\{\{svg:([a-z0-9-]+)\}\}/g, (_, n) => icon(n)) + '\n' + footer());
   console.log('built', `${p.name}.html`);
 }
@@ -150,7 +166,16 @@ for (const p of PAGES) {
 // Legal pages: the CRM's approved text in the site's design.
 buildLegal({
   write: (name, meta, main) => {
-    writeFileSync(`${name}.html`, head({ name, ...meta }) + '\n' + main + '\n' + footer());
+    const p = { name, legal: true, parent: name === 'legal' ? null : ['/legal', 'Legal'], crumb: meta.title.split('·')[0].trim(), ...meta };
+    p.ld = jsonLd(p, main);
+    built.push(p);
+    writeFileSync(`${name}.html`, head(p) + '\n' + main + '\n' + footer());
     console.log('built', `${name}.html`);
   },
 });
+
+// For search engines and AI assistants.
+writeFileSync('sitemap.xml', sitemap(built, new Date().toISOString().slice(0, 10)));
+writeFileSync('robots.txt', ROBOTS);
+writeFileSync('llms.txt', LLMS);
+console.log('built sitemap.xml, robots.txt, llms.txt');
