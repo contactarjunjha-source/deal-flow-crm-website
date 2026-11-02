@@ -234,7 +234,7 @@
       e.preventDefault();
       const f = new FormData(form);
       const body = `Name: ${f.get('name')}\nBusiness: ${f.get('business')}\nPhone: ${f.get('phone')}\nTeam size: ${f.get('team')}\n\n${f.get('message')}`;
-      location.href = `mailto:dealflowcrm@yahoo.com?subject=${encodeURIComponent('Deal Flow CRM enquiry from ' + (f.get('business') || f.get('name')))}&body=${encodeURIComponent(body)}`;
+      location.href = `mailto:support@dealflowcrm.co.in?subject=${encodeURIComponent('Deal Flow CRM enquiry from ' + (f.get('business') || f.get('name')))}&body=${encodeURIComponent(body)}`;
     });
   }
 })();

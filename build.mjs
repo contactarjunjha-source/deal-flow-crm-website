@@ -2,6 +2,11 @@
 // Edit pages/<name>.main.html (and <name>.credits.html), then run: node build.mjs
 import { readFileSync, writeFileSync } from 'node:fs';
 import { icon } from './icons.mjs';
+import { createHash } from 'node:crypto';
+
+// Each release gets new file versions, so browsers never mix new pages with old styles or scripts.
+const ver = (f) => createHash('sha1').update(readFileSync(f)).digest('hex').slice(0, 10);
+const V = { css: ver('site.css'), js: ver('site.js'), audio: ver('assets/audio/rotiyana-call.mp3') };
 
 const APP = 'https://app.dealflowcrm.co.in/signin';
 
@@ -66,7 +71,7 @@ const head = (p) => `<!DOCTYPE html>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/site.css">
+  <link rel="stylesheet" href="/site.css?v=${V.css}">
   <script>document.documentElement.classList.add('js')</script>
   <!-- Meta Pixel Code -->
   <script>
@@ -114,7 +119,7 @@ const footer = () => `
         <a class="brand" href="/"><img src="/assets/img/mark.png" alt="" width="76" height="30"><b>Deal Flow <i>CRM</i></b></a>
         <p>The CRM that tells your team what to do next, with an AI that answers every call.</p>
         <div class="foot-contact">
-          <a href="mailto:dealflowcrm@yahoo.com">${icon('mail')}dealflowcrm@yahoo.com</a>
+          <a href="mailto:support@dealflowcrm.co.in">${icon('mail')}support@dealflowcrm.co.in</a>
           <a href="tel:+917439852955">${icon('phone-call')}+91 74398 52955</a>
           <span>${icon('map-pin')}Made in India · data stored in Mumbai</span>
         </div>
@@ -130,13 +135,13 @@ const footer = () => `
     <div class="foot-bottom"><span>© 2026 Momentum Marketing &amp; Software Technologies</span><span class="legal"><a href="/cookies">Cookies</a><a href="/data-handling">Data handling</a><a href="/privacy-policy">Privacy</a></span></div>
   </div>
 </footer>
-<script src="/site.js" defer></script>
+<script src="/site.js?v=${V.js}" defer></script>
 </body>
 </html>
 `;
 
 for (const p of PAGES) {
   const main = readFileSync(`pages/${p.name}.main.html`, 'utf8');
-  writeFileSync(`${p.name}.html`, head(p) + '\n' + main.trim().split('<!--RIBBONS-->').join(RIBBONS).split('<!--CALL-->').join(readFileSync('pages/call.partial.html', 'utf8')).replace(/\{\{icon(-lg)?:([a-z0-9-]+)\}\}/g, (_, lg, n) => `<span class="ibox${lg ? ' lg' : ''}">${icon(n)}</span>`).replace(/\{\{svg:([a-z0-9-]+)\}\}/g, (_, n) => icon(n)) + '\n' + footer());
+  writeFileSync(`${p.name}.html`, head(p) + '\n' + main.trim().split('<!--RIBBONS-->').join(RIBBONS).split('<!--CALL-->').join(readFileSync('pages/call.partial.html', 'utf8').split('rotiyana-call.mp3').join('rotiyana-call.mp3?v=' + V.audio)).replace(/\{\{icon(-lg)?:([a-z0-9-]+)\}\}/g, (_, lg, n) => `<span class="ibox${lg ? ' lg' : ''}">${icon(n)}</span>`).replace(/\{\{svg:([a-z0-9-]+)\}\}/g, (_, n) => icon(n)) + '\n' + footer());
   console.log('built', `${p.name}.html`);
 }
