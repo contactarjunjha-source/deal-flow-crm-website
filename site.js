@@ -292,7 +292,7 @@
       const p = new URL(href).searchParams;
       const tier = p.get('buy'), seats = Number(p.get('seats') || 1);
       track('InitiateCheckout', { content_name: tier, num_items: seats, value: (tier === 'pro' ? 24000 : 12000) * seats, currency: 'INR' });
-    } else if (href.includes('app.dealflowcrm.co.in/signin')) {
+    } else if (href.includes('app.dealflowcrm.co.in/signin') || href.includes('app.dealflowcrm.co.in/signup')) {
       track('Lead', { content_name: (a.textContent || '').trim().slice(0, 40) });
     }
   }, true);

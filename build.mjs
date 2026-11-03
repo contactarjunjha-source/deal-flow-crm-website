@@ -11,6 +11,7 @@ const ver = (f) => createHash('sha1').update(readFileSync(f)).digest('hex').slic
 const V = { css: ver('site.css'), js: ver('site.js'), audio: ver('assets/audio/rotiyana-call.mp3') };
 
 const APP = 'https://app.dealflowcrm.co.in/signin';
+const SIGNUP = 'https://app.dealflowcrm.co.in/signup';
 
 const PAGES = [
   { name: 'index', path: '/', title: 'Deal Flow CRM | AI CRM with an AI Calling Agent for Sales Teams',
@@ -113,14 +114,14 @@ const head = (p) => `<!DOCTYPE html>
     <nav class="nav-links" aria-label="Main">${navLinks(p.nav)}</nav>
     <div class="nav-cta">
       <a class="login" href="${APP}">Log in</a>
-      <a class="btn btn-gold btn-sm" href="${APP}">Start free</a>
+      <a class="btn btn-gold btn-sm" href="${SIGNUP}">Start free</a>
       <button class="menu-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu"><i></i><i></i></button>
     </div>
   </header>
   <nav class="mobile-menu" id="mobile-menu" hidden aria-label="Main">
     ${navLinks(p.nav)}
     <a href="${APP}">Log in</a>
-    <a class="btn btn-gold" href="${APP}">Start free</a>
+    <a class="btn btn-gold" href="${SIGNUP}">Start free</a>
   </nav>
 </div>
 `;
@@ -141,7 +142,7 @@ const footer = () => `
       <div class="foot-cols">
         <div><h4>Product</h4><a href="/features">Features</a><a href="/ai-calling">AI calling</a><a href="/crm">CRM</a><a href="/integrations">Integrations</a></div>
         <div><h4>Solutions</h4><a href="/use-cases">Use cases</a><a href="/pricing">Pricing</a><a href="/security">Security</a><a href="/faq">Questions</a></div>
-        <div><h4>Company</h4><a href="/contact">Contact us</a><a href="${APP}">Log in</a><a href="${APP}">Start free</a><a href="/grievance">Grievance officer</a></div>
+        <div><h4>Company</h4><a href="/contact">Contact us</a><a href="${APP}">Log in</a><a href="${SIGNUP}">Start free</a><a href="/grievance">Grievance officer</a></div>
         <div><h4>Legal</h4><a href="/privacy-policy">Privacy</a><a href="/terms-of-service">Terms</a><a href="/billing-refunds">Refunds</a><a href="/legal">All policies</a></div>
       </div>
     </div>
