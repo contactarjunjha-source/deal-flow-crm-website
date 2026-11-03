@@ -665,3 +665,31 @@ h1, h2, h3 { margin: 0; font-weight: 700; letter-spacing: -0.035em; }
 .cur-seg { margin-top: 24px; }
 .cur-seg button { height: 38px; padding: 0 18px; font-size: 14px; }
 .head.center .cur-seg { display: inline-flex; }
+
+/* =====================================================================
+   Phones: nothing may be wider than the screen
+   ===================================================================== */
+/* The soft glows hang past the edges; clip them so the page never widens (phones zoomed out). */
+html, body { overflow-x: clip; }
+section, .footer { overflow-x: clip; }
+.glow { max-width: 100%; }
+.legal-layout { grid-template-columns: 290px minmax(0, 1fr); }
+@media (max-width: 980px) {
+  .legal-layout { grid-template-columns: minmax(0, 1fr); }
+  .legal-toc nav { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+  .legal-toc nav { grid-template-columns: minmax(0, 1fr); }
+  /* The comparison fits the screen instead of scrolling sideways. */
+  .compare-wrap { padding: 4px 12px 14px; }
+  .compare { min-width: 0; font-size: 13px; }
+  .compare th, .compare td { padding: 11px 4px; }
+  .compare thead th { font-size: 14px; }
+  .compare td:not(:first-child), .compare thead th:not(:first-child) { width: 17%; }
+  .doc table { font-size: 13px; }
+}
+@media (max-width: 640px) {
+  .doc { padding: 22px 18px; }
+  .legal-section .container { padding-left: 14px; padding-right: 14px; }
+  .call .call-convo .lines { height: 240px; }
+}
