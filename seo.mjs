@@ -16,6 +16,8 @@ const ORG = {
   telephone: '+91-7439852955',
   address: { '@type': 'PostalAddress', addressCountry: 'IN' },
   areaServed: 'Worldwide',
+  // Populate with your social profile URLs (LinkedIn, X, Facebook, YouTube, Crunchbase, Product Hunt, G2, Capterra) for Organization sameAs
+  sameAs: [],
   contactPoint: [{
     '@type': 'ContactPoint', contactType: 'customer support', email: 'support@dealflowcrm.co.in', telephone: '+91-7439852955',
     areaServed: 'Worldwide', availableLanguage: ['English', 'Hindi'],

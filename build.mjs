@@ -65,6 +65,8 @@ const head = (p) => `<!DOCTYPE html>
   <meta name="description" content="${p.description}">
   <meta name="theme-color" content="#050505">
   <link rel="canonical" href="https://dealflowcrm.co.in${p.path}">
+  <link rel="alternate" hreflang="en-IN" href="https://dealflowcrm.co.in${p.path}">
+  <link rel="alternate" hreflang="x-default" href="https://dealflowcrm.co.in${p.path}">
   <meta property="og:title" content="${p.title}">
   <meta property="og:description" content="${p.description}">
   <meta property="og:type" content="website">
@@ -72,17 +74,22 @@ const head = (p) => `<!DOCTYPE html>
   <meta property="og:image" content="https://dealflowcrm.co.in/assets/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Deal Flow CRM, the AI sales CRM with an AI calling agent">
   <meta property="og:site_name" content="Deal Flow CRM">
   <meta property="og:locale" content="en_IN">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${p.title}">
   <meta name="twitter:description" content="${p.description}">
   <meta name="twitter:image" content="https://dealflowcrm.co.in/assets/og-image.jpg">
+  <meta name="twitter:image:alt" content="Deal Flow CRM, the AI sales CRM with an AI calling agent">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <meta name="application-name" content="Deal Flow CRM">
+  <!-- Search Console verification: paste the code from Google Search Console here, then rebuild + deploy -->
+  <!-- <meta name="google-site-verification" content="YOUR_CODE_HERE"> -->
   <link rel="apple-touch-icon" href="/assets/logo-512.png">
   ${p.ld || ''}
   <link rel="icon" href="/assets/favicon.png">
+  <link rel="dns-prefetch" href="https://app.dealflowcrm.co.in">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -110,7 +117,7 @@ const head = (p) => `<!DOCTYPE html>
 
 <div class="nav-wrap">
   <header class="nav">
-    <a class="brand" href="/" aria-label="Deal Flow CRM home"><img src="/assets/img/mark.png" alt="" width="56" height="22"><b>Deal Flow <i>CRM</i></b></a>
+    <a class="brand" href="/" aria-label="Deal Flow CRM home"><img src="/assets/img/mark.png" alt="Deal Flow CRM" width="56" height="22" loading="eager" decoding="async"><b>Deal Flow <i>CRM</i></b></a>
     <nav class="nav-links" aria-label="Main">${navLinks(p.nav)}</nav>
     <div class="nav-cta">
       <a class="login" href="${APP}">Log in</a>
@@ -131,7 +138,7 @@ const footer = () => `
   <div class="container">
     <div class="foot-top">
       <div class="foot-brand">
-        <a class="brand" href="/"><img src="/assets/img/mark.png" alt="" width="76" height="30"><b>Deal Flow <i>CRM</i></b></a>
+        <a class="brand" href="/"><img src="/assets/img/mark.png" alt="Deal Flow CRM" width="76" height="30" loading="lazy" decoding="async"><b>Deal Flow <i>CRM</i></b></a>
         <p>The CRM that tells your team what to do next, with an AI that answers every call.</p>
         <div class="foot-contact">
           <a href="mailto:support@dealflowcrm.co.in">${icon('mail')}support@dealflowcrm.co.in</a>
